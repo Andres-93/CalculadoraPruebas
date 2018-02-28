@@ -3,27 +3,29 @@ package calculadora;
 import static org.junit.Assert.*;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CalculadoraTest {
 
+	static Calculadora pete;
 	
-	Calculadora pete;
-	
-	@Before
-	public void creaCalculadora() {
+	@BeforeClass
+	public static void creaCalculadora() {
 		pete = new Calculadora(20,30);
 		System.out.println("Inicio prueba");
 		
 	}
-	@After
-	public void creaCalculadora2() {
+	@AfterClass
+	public static void creaCalculadora2() {
 		
 		System.out.println("Fin de la prueba");
-		
+		pete =  null;
 	}
 	
+
 	
 	@Test
 	public void testSuma() {
