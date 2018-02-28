@@ -10,38 +10,38 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-@RunWith(Parameterized.class)
 
-public class CuentaBancariaTestParamDepositar {
+@RunWith(Parameterized.class)
+public class CuentaBancariaTestParamRetirar {
 
 	private int saldo;
 	private String password;
 	private int esperado;
-	private int deposito;
+	private int retiro;
 	/*
-	 * Debemos crear aparte del atributo con el valor que esperamos, tambien uno para modificar la cantidad que queramos depositar
-	 * ya que queremos probar ambos casos.
+	 * Debemos crear aparte del atributo con el valor que esperamos, tambien uno para modificar la cantidad que queramos retirar
+	 * ya que queremos todos los casos
 	 */
-	public CuentaBancariaTestParamDepositar(int saldo, String password,int esperado,int deposito) {
+	public CuentaBancariaTestParamRetirar(int saldo, String password,int esperado,int retiro) {
 		this.saldo = saldo;
 		this.password = password;
 		this.esperado = esperado;
-		this.deposito = deposito;
+		this.retiro = retiro;
 	}
 
 
 	@Parameters
 	public static Collection<Object[]> numeros(){
 		
-		return Arrays.asList(new Object[][] { {50,"admin",100,50},{0,"admin",-1,0}});
+		return Arrays.asList(new Object[][] { {100,"admin",-1,150},{100,"admin",50,50},{100,"armin",-2,0}});
 		
 	}
 
 	@Test
 	public void testDepositar() {
 		
-		CuentaBancaria cuenta = new CuentaBancaria(saldo, password);
-		int resultado = cuenta.depositar(deposito);
+		CuentaBancaria cuenta = new CuentaBancaria(saldo, "admin");
+		int resultado = cuenta.retirar(retiro, password);
 		assertEquals(esperado, resultado);
 	}
 
